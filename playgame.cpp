@@ -9,7 +9,8 @@ class Game {
 private:
     int snum;  
     int max;   
-    bool un;    
+    bool un; 
+	int rangemax;   
 
 public:
     Game() {
@@ -17,30 +18,40 @@ public:
         snum = rand() % 100 + 1;
         max = 0;
         un = false;
+        rangemax=100;
+    
     }
 
     void selectlevel(int level) {
         switch (level) {
             case 1:
                 un = true;
+                max=0;
+                rangemax=20;
                 break;
             case 2:
+            	un= false;
                 max = 15;
+                rangemax=50;
                 break;
             case 3:
+            	un=false;
                 max = 7;
+                rangemax=100;
                 break;
             default:
-               // cout << "Invalid choice. Defaulting to Easy." << endl;
+                cout << "Invalid choice. Defaulting to Easy." << endl;
                 un = true;
+                rangemax=20;
                 break;
         }
+        snum=rand()% rangemax+1;
     }
 
     void play() {
         int guess;
         int attempts = 0;
-        cout << "Guess the number between 1 to 100!" << endl;
+        cout << "Guess the number between 1 and "<< rangemax <<"!" << endl;
 
         while (un || attempts < max) {
             cout << "Enter your guess: ";
